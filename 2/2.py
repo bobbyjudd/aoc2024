@@ -1,11 +1,6 @@
 # https://adventofcode.com/2024/day/2
 from typing import List
 
-reports = []
-with open("input.txt") as f:
-    for l in f.readlines():
-        reports.append([int(level) for level in l.split(" ")])
-
 
 def report_is_safe(report: List[int]) -> bool:
     level_diffs = [report[i - 1] - report[i] for i in range(1, len(report))]
@@ -21,14 +16,14 @@ def report_is_safe(report: List[int]) -> bool:
     return safe
 
 
-def part_1():
+def part_1(reports: List[List[int]]):
     safe_reports = 0
     for levels in reports:
         safe_reports += 1 if report_is_safe(levels) else 0
     return safe_reports
 
 
-def part_2():
+def part_2(reports: List[List[int]]):
     safe_reports = 0
     for levels in reports:
         if report_is_safe(levels):
@@ -42,4 +37,14 @@ def part_2():
     return safe_reports
 
 
-print(f"Part 1: {part_1()}\nPart 2: {part_2()}")
+def main():
+    reports = []
+    with open("input.txt") as f:
+        for l in f.readlines():
+            reports.append([int(level) for level in l.split(" ")])
+    print(f"Part 1: {part_1(reports)}")
+    print(f"Part 2: {part_2(reports)}")
+
+
+if __name__ == "__main__":
+    main()
